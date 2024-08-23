@@ -50,11 +50,11 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.center, // Center horizontally
           children: [
             const Text(
-              "Welcome to the workflow management system, we help you manage the workflow for your company",
+              "Welcome to the workflow management system, Let's make your work easier",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, color: Colors.white),
             ),
-            const SizedBox(height: 20), // Space between text and links
+            const SizedBox(height: 120), // Space between text and links
             RichText(
               text: TextSpan(
                 text: "Don't have an account? ",
