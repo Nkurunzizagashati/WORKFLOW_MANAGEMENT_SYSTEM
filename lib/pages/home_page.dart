@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:workflow_management_system/services/user_manager.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,7 +11,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late TapGestureRecognizer _registerTapRecognizer;
-  late TapGestureRecognizer _loginTapRecognizer;
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _userManager = UserManager(); // UserManager class
 
   @override
   void initState() {
@@ -19,18 +23,28 @@ class _HomePageState extends State<HomePage> {
       ..onTap = () {
         Navigator.pushNamed(context, '/register');
       };
-
-    _loginTapRecognizer = TapGestureRecognizer()
-      ..onTap = () {
-        Navigator.pushNamed(context, '/login');
-      };
   }
 
   @override
   void dispose() {
     _registerTapRecognizer.dispose();
-    _loginTapRecognizer.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
+  }
+
+  void _login() {
+    final email = _emailController.text;
+    final password = _passwordController.text;
+
+    final success = _userManager.loginUser(email, password);
+    if (success) {
+      Navigator.pushNamed(context, '/home');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Invalid email or password")),
+      );
+    }
   }
 
   @override
@@ -67,10 +81,11 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.grey.shade200,
                   border: Border.all(color: Colors.white),
                   borderRadius: BorderRadius.circular(14)),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: TextField(
-                  decoration: InputDecoration(
+                  controller: _emailController,
+                  decoration: const InputDecoration(
                     hintText: "Enter your username or password",
                     border: InputBorder.none,
                   ),
@@ -86,11 +101,12 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.grey.shade200,
                   border: Border.all(color: Colors.white),
                   borderRadius: BorderRadius.circular(14)),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: TextField(
+                  controller: _passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Enter your password",
                     border: InputBorder.none,
                   ),
@@ -101,18 +117,21 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple,
-                  borderRadius: BorderRadius.circular(14)),
-              child: const Center(
-                child: Text(
-                  "Login",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+            child: TextButton(
+              onPressed: _login,
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple,
+                    borderRadius: BorderRadius.circular(14)),
+                child: const Center(
+                  child: Text(
+                    "Login",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
