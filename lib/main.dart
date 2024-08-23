@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:workflow_management_system/pages/auth/login_page.dart';
 import 'package:workflow_management_system/pages/auth/register_page.dart';
 import 'package:workflow_management_system/pages/home_page.dart';
+// import 'package:firebase_core/firebase_core.dart'; // Import firebase_core
 
 void main() {
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(); // Initialize Firebase
   runApp(const MyApp());
 }
 

@@ -36,68 +36,112 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade300,
-      appBar: AppBar(
-        title: const Center(
-          child: Text("WORKFLOW MANAGEMENT SYSTEM"),
-        ),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // Center vertically
-          crossAxisAlignment: CrossAxisAlignment.center, // Center horizontally
-          children: [
-            const Text(
-              "Welcome to the workflow management system, Let's make your work easier",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16, color: Colors.white),
+      backgroundColor: Colors.grey.shade300,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.android,
+            size: 100,
+          ),
+          const SizedBox(height: 75),
+          const Text(
+            "HELLO AGAIN!",
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(height: 120), // Space between text and links
-            RichText(
-              text: TextSpan(
-                text: "Don't have an account? ",
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
-                children: [
-                  TextSpan(
-                    text: "Register now",
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.blue, // Link color
-                      decoration: TextDecoration.underline,
-                    ),
-                    recognizer: _registerTapRecognizer,
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            "Welcome back, you've been missed!",
+            style: TextStyle(
+              fontSize: 20,
+            ),
+          ),
+          const SizedBox(height: 50),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  border: Border.all(color: Colors.white),
+                  borderRadius: BorderRadius.circular(14)),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: "Enter your username or password",
+                    border: InputBorder.none,
                   ),
-                ],
+                ),
               ),
             ),
-            const SizedBox(height: 10),
-            RichText(
-              text: TextSpan(
-                text: "Already have an account? ",
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
-                children: [
-                  TextSpan(
-                    text: "Login",
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.blue,
-                      decoration: TextDecoration.underline,
-                    ),
-                    recognizer: _loginTapRecognizer,
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  border: Border.all(color: Colors.white),
+                  borderRadius: BorderRadius.circular(14)),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: TextField(
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: "Enter your password",
+                    border: InputBorder.none,
                   ),
-                ],
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                  color: Colors.deepPurple,
+                  borderRadius: BorderRadius.circular(14)),
+              child: const Center(
+                child: Text(
+                  "Login",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 20.0),
+          RichText(
+            text: TextSpan(
+              children: [
+                const TextSpan(
+                  text: "Not a member? ",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                TextSpan(
+                  text: "Register now",
+                  style: const TextStyle(
+                    color: Colors.blue,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  recognizer: _registerTapRecognizer,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
